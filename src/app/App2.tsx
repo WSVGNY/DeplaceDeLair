@@ -4,12 +4,12 @@ import Counter from './Counter'
 import Team from './Team'
 import Leaderboard from './Leaderboard'
 
-const App = () => (
+const App2 = () => (
   <div>
-    <h1>Hello, world.</ h1>
-    <h1>Manager</ h1>
+    <h1>Classement!</ h1>
     {/* <Team name="team one"/> */}
+    <Leaderboard />
   </div>
 )
 
-export default hot(App)
+export default hot(App2)
