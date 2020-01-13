@@ -27,31 +27,8 @@ const createWindow = () => {
   });
 };
 
-// const createLeaderboardWindow = () => {
-//   mainWindow = new BrowserWindow({
-//     width: 600,
-//     height: 600,
-//     webPreferences: {
-//       nodeIntegration: true,
-//     },
-//   });
-
-//   // mainWindow.loadFile(path.join(__dirname, 'dist/index.html?viewB'));
-//   mainWindow.loadURL(`file://${path.join(__dirname, './dist/index.html?viewB')}`);
-
-//   mainWindow.on('closed', () => {
-//     mainWindow = null;
-//   });
-
-//   mainWindow.on('ready-to-show', () => {
-//     mainWindow.show();
-//     mainWindow.focus();
-//   });
-// };
-
 app.on('ready', () => {
   createWindow();
-  // createLeaderboardWindow();
 });
 
 app.on('window-all-closed', () => {

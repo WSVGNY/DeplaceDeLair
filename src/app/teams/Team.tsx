@@ -4,11 +4,13 @@ class Team {
   @observable public name: string
   @observable public time: number
   @observable public distance: number
+  @observable public completed: boolean
 
-  constructor(name : string) {
+  constructor(name: string, time: number, distance: number) {
     this.name = name
-    this.time = 0
-    this.distance = 0
+    this.time = time
+    this.distance = distance
+    this.completed = false
   }
 }
 
