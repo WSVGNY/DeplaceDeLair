@@ -7,6 +7,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    // backgroundColor: '#2c2c54',
     webPreferences: {
       nodeIntegration: true,
     },
@@ -26,31 +27,31 @@ const createWindow = () => {
   });
 };
 
-const createLeaderboardWindow = () => {
-  mainWindow = new BrowserWindow({
-    width: 600,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
+// const createLeaderboardWindow = () => {
+//   mainWindow = new BrowserWindow({
+//     width: 600,
+//     height: 600,
+//     webPreferences: {
+//       nodeIntegration: true,
+//     },
+//   });
 
-  // mainWindow.loadFile(path.join(__dirname, 'dist/index.html?viewB'));
-  mainWindow.loadURL(`file://${path.join(__dirname, './dist/index.html?viewB')}`);
+//   // mainWindow.loadFile(path.join(__dirname, 'dist/index.html?viewB'));
+//   mainWindow.loadURL(`file://${path.join(__dirname, './dist/index.html?viewB')}`);
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+//   mainWindow.on('closed', () => {
+//     mainWindow = null;
+//   });
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show();
-    mainWindow.focus();
-  });
-};
+//   mainWindow.on('ready-to-show', () => {
+//     mainWindow.show();
+//     mainWindow.focus();
+//   });
+// };
 
 app.on('ready', () => {
   createWindow();
-  createLeaderboardWindow();
+  // createLeaderboardWindow();
 });
 
 app.on('window-all-closed', () => {
