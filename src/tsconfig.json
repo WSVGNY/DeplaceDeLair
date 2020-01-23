@@ -8,5 +8,5 @@
     "target": "es6",
     "jsx": "react"
   },
-  "include": ["./app/**/*"]
+  "include": ["./app/**/*", "window2.js"]
 }
