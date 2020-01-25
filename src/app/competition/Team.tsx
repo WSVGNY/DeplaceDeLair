@@ -4,17 +4,27 @@ import { Result } from './Result'
 export class Team {
     @observable public name: string
     @observable public results: Result[]
-    // @observable public bestResult: Result
-    @observable public completed: boolean
 
     constructor(name: string) {
         this.name = name
         this.results = []
-        this.completed = false
     }
 
     @computed get hasPlayed(): boolean {
+        return this.results.length !== 0
+    }
+
+    @computed get completed(): boolean {
         return this.results.length === 3
+    }
+
+    @computed get lastResult(): string {
+        if (this.results.length === 0) {
+            return "---"
+        }
+
+        return this.results[this.results.length - 1].display
+        // return this.results.find((result: Result) => result.id === String(this.results.length)).display
     }
 
     @computed get bestResult(): Result {
@@ -29,12 +39,10 @@ export class Team {
         let bestResult: Result = this.results[0]
 
         for (const result of this.results) {
-            if (result.time) {
-                if (result.time < bestResult.time) {
-                    bestResult = result
-                }
-            } else {
-                if (result.distance > bestResult.distance) {
+            if (result.comparable.time < bestResult.comparable.time) {
+                bestResult = result
+            } else if (result.comparable.time === bestResult.comparable.time) {
+                if (result.comparable.distance > bestResult.comparable.distance) {
                     bestResult = result
                 }
             }

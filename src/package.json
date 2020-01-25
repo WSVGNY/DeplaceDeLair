@@ -1,13 +1,23 @@
 {
-  "name": "electron-typescript",
+  "name": "classeement",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "watch": "rm -rf ./dist && mkdir ./dist && cp ./app/development.html ./dist/index.html && NODE_ENV=development webpack-dev-server --hot",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./app/production.html ./dist/index.html && NODE_ENV=development webpack",
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "main": "main.js",
+  "build": {
+    "appId": "your.id",
+    "files": [
+      "./dist/**/*",
+      "./main.js",
+      "./polymtl_logo.png"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -21,6 +31,7 @@
     "babel-loader": "^8.0.6",
     "core-js": "^3.2.1",
     "electron": "^6.0.8",
+    "electron-builder": "^22.2.0",
     "fork-ts-checker-webpack-plugin": "^1.5.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -35,9 +46,10 @@
   "dependencies": {
     "@material-ui/core": "^4.8.3",
     "@types/xlsx": "^0.0.36",
-    "csv-parser": "^2.3.2",
+    "file-loader": "^5.0.2",
     "mobx": "^5.15.1",
     "mobx-react": "^6.1.4",
+    "react-animation": "^1.2.2",
     "react-flip-move": "^3.0.4",
     "xlsx": "^0.15.4"
   }
