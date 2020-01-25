@@ -9,13 +9,14 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
+  "homepage": "./",
   "main": "main.js",
   "build": {
     "appId": "your.id",
     "files": [
       "./dist/**/*",
       "./main.js",
-      "./polymtl_logo.png"
+      "./node_modules/**/*"
     ]
   },
   "devDependencies": {

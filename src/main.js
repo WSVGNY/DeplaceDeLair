@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
-
 const { dialog } = require('electron')
+const path = require('path')
 
 let mainWindow;
 
@@ -14,7 +14,8 @@ const createWindow = () => {
     },
   });
 
-  mainWindow.loadURL(`file://${__dirname}/dist/index.html`);
+  // mainWindow.loadURL(`file://${__dirname}/dist/index.html`);
+  mainWindow.loadURL(`file://${path.join(__dirname, '/dist/index.html')}`)
 
   mainWindow.on('closed', () => {
     mainWindow = null;
