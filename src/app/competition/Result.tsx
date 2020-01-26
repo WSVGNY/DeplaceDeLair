@@ -25,11 +25,11 @@ export class Result {
 
     @computed get displayTime(): string {
         if (this.time === undefined) {
-            return "-- : -- : --"
+            return "-"
         }
         
         if (this.time === 0) {
-            return "-- : -- : --"
+            return "-"
         }
 
         return this.time.toFixed(2) + " s"

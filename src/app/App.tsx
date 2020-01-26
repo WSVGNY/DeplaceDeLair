@@ -1,14 +1,13 @@
 import * as React from 'react'
-import Box from '@material-ui/core/Box'
-import Leaderboard from './leaderboard/Leaderboard'
 import store from './competition/TeamStore';
+import Leaderboard from './leaderboard/Leaderboard'
 import LastTeam from './leaderboard/LastTeam';
 import NextTeam from './leaderboard/NextTeam';
 import { hot } from 'react-hot-loader/root'
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import { UpdateService } from './competition/UpdateService';
 
-// import polymtlLogo from '../polymtl_logo.png';
+import polymtlLogo from './polymtl.png';
 const { ipcRenderer } = require('electron')
 
 ipcRenderer.on('path', function (event, arg) {
@@ -19,7 +18,7 @@ ipcRenderer.on('path', function (event, arg) {
 
 const App = () => {
     return (
-        <div style={{ width: '80%', position: 'absolute', left: '50%', transform: 'translate(-50%)', marginTop: '5%' }}>
+        <div style={{ width: '80%', position: 'absolute', left: '50%', transform: 'translate(-50%)', marginTop: '25px' }}>
             <Box display="flex" flexDirection="row">
                 <Box width={2 / 3}>
                     <Typography align="left" component="div" variant="h1">
@@ -31,14 +30,14 @@ const App = () => {
                     </Typography>
                 </Box>
                 <Box width={1 / 3} >
-                    {/* <img src={polymtlLogo} style={{width: '100%', right: '0', bottom: '0'}} /> */}
+                    <img src={polymtlLogo} style={{width: '100%', right: '0', bottom: '0'}} />
                 </Box>
             </Box>
 
-            <Box display="flex" flexDirection="column">
+            <Box display="flex" flexDirection="column" marginTop={5}>
                 <Box><Leaderboard store={store} /></Box>
 
-                <Box display="flex" flexDirection="row" marginTop={6}>
+                <Box display="flex" flexDirection="row" marginTop={5}>
                     <Box width={3 / 5} paddingRight={10}> <LastTeam store={store} /></Box>
                     <Box width={2 / 5}><NextTeam store={store} /></Box>
                 </Box>

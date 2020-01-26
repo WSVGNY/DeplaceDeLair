@@ -23,7 +23,7 @@ export default class NextTeam extends React.Component<{ store: TeamStore }, {}> 
         return (
             <Box>
                 <Typography align="left" component="div" variant="h4">
-                    <Box color="#000000"> Prochaine equipe</Box>
+                    <Box color="#000000"> Prochaine équipe</Box>
                 </Typography>
 
                 <Box width={1}

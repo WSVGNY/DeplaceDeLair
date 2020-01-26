@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
-const { dialog } = require('electron')
-const path = require('path')
+const { dialog } = require('electron');
+const path = require('path');
 
 let mainWindow;
 
@@ -30,7 +30,6 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow();
   dialog.showOpenDialog( path => {
-    console.log(path);
     mainWindow.webContents.send( 'path', path );
   });
 });

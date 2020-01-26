@@ -1,9 +1,8 @@
 import * as React from 'react'
+import FlipMove from 'react-flip-move';
 import { Typography, Box, Button } from '@material-ui/core'
 import { observer } from "mobx-react"
 import { TeamStore } from '../competition/TeamStore'
-import FlipMove from 'react-flip-move';
-import { UpdateService } from '../competition/UpdateService'
 
 @observer
 export default class Leaderboard extends React.Component<{ store: TeamStore }, {}> {
@@ -24,7 +23,7 @@ export default class Leaderboard extends React.Component<{ store: TeamStore }, {
                 flexDirection="row"
                 alignItems="center">
                 <Box width={1 / 6}> <Typography component={'span'}> <Box paddingLeft={2}>Position</Box></Typography></Box>
-                <Box width={1 / 2}> <Typography component={'span'}> <Box>Nom d'equipe</Box></Typography></Box>
+                <Box width={1 / 2}> <Typography component={'span'}> <Box>Équipe</Box></Typography></Box>
                 <Box width={1 / 6}> <Typography component={'span'}><Box>Temps</Box></Typography></Box>
                 <Box width={1 / 6}> <Typography component={'span'}><Box>Distance</Box></Typography></Box>
             </Box>)
@@ -44,7 +43,7 @@ export default class Leaderboard extends React.Component<{ store: TeamStore }, {
             const height = (i === 0) ? 80 : 50
 
             const name = (leaders[i]) ? leaders[i].name : "-"
-            const time = (leaders[i]) ? leaders[i].bestResult.displayTime : "-- : -- : --"
+            const time = (leaders[i]) ? leaders[i].bestResult.displayTime : "-"
             const dist = (leaders[i]) ? leaders[i].bestResult.displayDist : "-"
             const key = (leaders[i]) ? leaders[i].name : i
 

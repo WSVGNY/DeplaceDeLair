@@ -1,22 +1,25 @@
 {
-  "name": "classeement",
+  "name": "deplacedelair",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "watch": "rm -rf ./dist && mkdir ./dist && cp ./app/development.html ./dist/index.html && NODE_ENV=development webpack-dev-server --hot",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./app/production.html ./dist/index.html && NODE_ENV=development webpack",
     "start": "electron main.js",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder --mac"
   },
   "homepage": "./",
   "main": "main.js",
   "build": {
     "appId": "your.id",
+    "win": {
+      "target": "nsis"
+    },
     "files": [
       "./dist/**/*",
       "./main.js",
-      "./node_modules/**/*"
+      "./node_modules/**/*",
+      "./app/polymtl.png"
     ]
   },
   "devDependencies": {
@@ -47,11 +50,11 @@
   "dependencies": {
     "@material-ui/core": "^4.8.3",
     "@types/xlsx": "^0.0.36",
-    "file-loader": "^5.0.2",
     "mobx": "^5.15.1",
     "mobx-react": "^6.1.4",
     "react-animation": "^1.2.2",
     "react-flip-move": "^3.0.4",
+    "url-loader": "^3.0.0",
     "xlsx": "^0.15.4"
   }
 }
