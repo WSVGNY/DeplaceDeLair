@@ -20,12 +20,12 @@ export default class LastTeam extends React.Component<{ store: TeamStore }, {}> 
         const lastTeam: Team = this.props.store.lastTeam
         const lastTeamName: string = (lastTeam) ? lastTeam.name : "-"
         const lastTeamResult = (lastTeam) ? lastTeam.lastResult : "-"
-        const noEssai = (lastTeam) ? "Essaie " + lastTeam.results.length : "Essaie #"
+        const noEssai = (lastTeam) ? " Essai # " + lastTeam.results.length : " Essai #"
 
         return (
             <Box>
                 <Typography align="left" component="div" variant="h4">
-                    <Box color="#000000"> {noEssai}</Box>
+                    <Box color="#000000"> Équipe actuelle -{noEssai}</Box>
                 </Typography>
 
                 <Box width={1}
@@ -44,7 +44,7 @@ export default class LastTeam extends React.Component<{ store: TeamStore }, {}> 
                             animationOut="bounceOut"
                             durationOut={500}
                         >
-                            <Typography component={'span'}><Box fontSize={48} fontWeight="fontWeightLight">{lastTeamName}</Box></Typography>
+                            <Typography component={'span'}><Box fontSize={48} fontWeight="fontWeightLight" color="#008000">{lastTeamName}</Box></Typography>
                         </AnimateOnChange>
                     </Box>
 
@@ -54,7 +54,7 @@ export default class LastTeam extends React.Component<{ store: TeamStore }, {}> 
                             animationOut="bounceOut"
                             durationOut={500}
                         >
-                            <Typography component={'span'}><Box fontSize={48} fontWeight="fontWeightLight">{lastTeamResult}</Box></Typography>
+                            <Typography component={'span'}><Box fontSize={48} fontWeight="fontWeightLight" color="#008000">{lastTeamResult}</Box></Typography>
                         </AnimateOnChange>
                     </Box>
                 </Box>

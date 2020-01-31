@@ -85,6 +85,8 @@ export class UpdateService {
                     return localTeam
                 }
 
+                // Add condition for if a result (time or distance) is already here
+
                 // Update existing result
                 if (localTeam.results[localResultIndex].time !== result.time) {
                     localTeam.results[localResultIndex].time = result.time

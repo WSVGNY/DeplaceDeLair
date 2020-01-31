@@ -20,7 +20,7 @@ export class Result {
     }
 
     @computed get display(): string {
-        return (this.time === undefined) ? this.distance.toFixed(2) + " cm" : this.time.toFixed(2) + " s"
+        return (this.time === undefined) ? this.distance.toFixed(1) + " cm" : this.time.toFixed(2) + " ms"
     }
 
     @computed get displayTime(): string {
@@ -32,18 +32,18 @@ export class Result {
             return "-"
         }
 
-        return this.time.toFixed(2) + " s"
+        return this.time.toFixed(2) + " ms"
     }
 
     @computed get displayDist(): string {
         if (this.time === undefined) {
-            return this.distance + " cm"
+            return this.distance.toFixed(1) + " cm"
         }
 
         if (this.time === 0) {
             return "0 cm"
         }
 
-        return "30 cm"
+        return "Complet"
     }
 }

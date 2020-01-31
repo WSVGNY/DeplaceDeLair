@@ -40,7 +40,7 @@ export default class NextTeam extends React.Component<{ store: TeamStore }, {}> 
                         animationOut="bounceOut"
                         durationOut={500}
                     >
-                        <Typography component={'span'}><Box paddingLeft={2} fontSize={48} fontWeight="fontWeightLight">{nextTeamName}</Box></Typography>
+                        <Typography component={'span'}><Box paddingLeft={2} fontSize={48} fontWeight="fontWeightLight" color="#FF8C00">{nextTeamName}</Box></Typography>
 
                     </AnimateOnChange>
                 </Box>
