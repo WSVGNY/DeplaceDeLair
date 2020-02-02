@@ -15,9 +15,9 @@ export class TeamStore {
         return this.teams.find((team: Team) => !team.completed && team.name !== this.lastTeam.name)
     }
 
-    @computed get leaders(): Team[] {
+    @computed get allLeaders(): Team[] {
         const leaders: Team[] = []
-
+        
         for (const team of this.teams) {
             if (!team.hasPlayed) {
                 continue
@@ -35,6 +35,13 @@ export class TeamStore {
 
             return -(t1.bestResult.comparable.distance - t2.bestResult.comparable.distance)
         })
+
+        return leaders
+    }
+
+    // Returns top 5 for leaderboard
+    @computed get leaders(): Team[] {
+        const leaders: Team[] = this.allLeaders
 
         if (leaders.length > 5) {
             return leaders.slice(0,5)

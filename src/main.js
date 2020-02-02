@@ -30,6 +30,7 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow();
   dialog.showOpenDialog( path => {
+    console.log(path)
     mainWindow.webContents.send( 'path', path );
   });
 });

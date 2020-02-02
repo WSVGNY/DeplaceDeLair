@@ -2,37 +2,38 @@ import { Team } from "./Team";
 import { TeamStore } from "./TeamStore";
 import { Result } from "./Result";
 import * as XLSX from 'xlsx';
+const path = require('path');
 
 interface ITeam {
     name: string;
 }
 
-export class UpdateService {
+export class ExternalService {
 
     public static path: string
 
     public static loadTeamsFromFile(store: TeamStore): void {
-        const retrievedTeams: ITeam[] = UpdateService.getTeamsFromFile()
+        const retrievedTeams: ITeam[] = ExternalService.getTeamsFromFile()
 
         for (const iTeam of retrievedTeams) {
             const team = new Team(iTeam.name)
-            team.results = UpdateService.getResultsFromFile(iTeam)
+            team.results = ExternalService.getResultsFromFile(iTeam)
             store.teams.push(team)
         }
     }
 
     public static startCompetition(store: TeamStore) {
-        const retrievedTeams = UpdateService.getTeamsFromFile()
-        const lastPlayedTeam = UpdateService.updateTeamResults(store.teams, retrievedTeams)
+        const retrievedTeams = ExternalService.getTeamsFromFile()
+        const lastPlayedTeam = ExternalService.updateTeamResults(store.teams, retrievedTeams)
         if (lastPlayedTeam) {
             store.lastTeam = lastPlayedTeam
         }
 
-        setTimeout(() => UpdateService.startCompetition(store), 1000);
+        setTimeout(() => ExternalService.startCompetition(store), 1000);
     }
 
     private static getTeamsFromFile(): ITeam[] {
-        const workbook = XLSX.readFile(UpdateService.path)
+        const workbook = XLSX.readFile(ExternalService.path)
         const json = XLSX.utils.sheet_to_json(workbook.Sheets["teams"])
         const retrievedTeams: ITeam[] = json as ITeam[]
 
@@ -74,7 +75,7 @@ export class UpdateService {
     private static updateTeamResults(localTeams: Team[], retrievedTeams: ITeam[]): Team {
         for (const localTeam of localTeams) {
             const retrievedTeam: ITeam = retrievedTeams.find((t: ITeam) => localTeam.name === t.name)
-            const retrievedResults: Result[] = UpdateService.getResultsFromFile(retrievedTeam)
+            const retrievedResults: Result[] = ExternalService.getResultsFromFile(retrievedTeam)
 
             for (const result of retrievedResults) {
                 const localResultIndex = localTeam.results.findIndex(x => x.id === result.id);
@@ -99,5 +100,25 @@ export class UpdateService {
                 }
             }
         }
+    }
+
+    public static exportResults(store: TeamStore): void {
+        // Results output path
+        const year = "" + new Date().getFullYear()
+        const outputPath = ExternalService.path.slice(0, ExternalService.path.lastIndexOf(path.sep)).concat(path.sep + "deplacedelair_secondaire_resultats_" + year)
+
+        // Results data
+        const leaders: Team[] = store.allLeaders
+        const data = [["Equipe", "Resultat"]]
+        for (const leader of leaders) {
+            data.push([leader.name, leader.bestResult.display])
+        }
+
+        // Write Excel workbook
+        const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+        const worksheetName = "resultats"
+        const worksheet = XLSX.utils.aoa_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, worksheetName);
+        XLSX.writeFile(workbook, outputPath.concat('.xlsx'));
     }
 }
