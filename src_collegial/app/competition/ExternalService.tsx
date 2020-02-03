@@ -5,8 +5,13 @@ import * as XLSX from 'xlsx';
 const path = require('path');
 
 interface ITeam {
-    name: string;
+    equipe: string;
 }
+
+// Excel file names
+const TEAM_SHEET_NAME = "equipes"
+const TEAM_COLUMN_NAME = "equipe"
+const POWER_COLUMN_NAME = "puissance"
 
 export class ExternalService {
 
@@ -16,7 +21,7 @@ export class ExternalService {
         const retrievedTeams: ITeam[] = ExternalService.getTeamsFromFile()
 
         for (const iTeam of retrievedTeams) {
-            const team = new Team(iTeam.name)
+            const team = new Team(iTeam.equipe)
             team.results = ExternalService.getResultsFromFile(iTeam)
             store.teams.push(team)
         }
@@ -34,7 +39,7 @@ export class ExternalService {
 
     private static getTeamsFromFile(): ITeam[] {
         const workbook = XLSX.readFile(ExternalService.path)
-        const json = XLSX.utils.sheet_to_json(workbook.Sheets["teams"])
+        const json = XLSX.utils.sheet_to_json(workbook.Sheets[TEAM_SHEET_NAME])
         const retrievedTeams: ITeam[] = json as ITeam[]
 
         return retrievedTeams
@@ -43,7 +48,7 @@ export class ExternalService {
     private static getResultsFromFile(iTeam: ITeam): Result[] {
         const results: Result[] = []
         for (var prop in iTeam) {
-            if (prop == "name") {
+            if (prop == TEAM_COLUMN_NAME) {
                 continue
             }
 
@@ -57,7 +62,7 @@ export class ExternalService {
                 results.push(new Result(resultId))
             }
 
-            if (prop.endsWith("puissance")) {
+            if (prop.endsWith(POWER_COLUMN_NAME)) {
                 const resultPuissance: number = iTeam[prop]
                 results.find((res: Result) => res.id === resultId).puissance = resultPuissance
                 continue
@@ -69,7 +74,7 @@ export class ExternalService {
     // Returns the team that just played
     private static updateTeamResults(localTeams: Team[], retrievedTeams: ITeam[]): Team {
         for (const localTeam of localTeams) {
-            const retrievedTeam: ITeam = retrievedTeams.find((t: ITeam) => localTeam.name === t.name)
+            const retrievedTeam: ITeam = retrievedTeams.find((t: ITeam) => localTeam.name === t.equipe)
             const retrievedResults: Result[] = ExternalService.getResultsFromFile(retrievedTeam)
 
             for (const result of retrievedResults) {

@@ -6,7 +6,7 @@
     "watch": "rm -rf ./dist && mkdir ./dist && cp ./app/development.html ./dist/index.html && NODE_ENV=development webpack-dev-server --hot",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./app/production.html ./dist/index.html && NODE_ENV=development webpack",
     "start": "electron main.js",
-    "dist": "electron-builder --mac"
+    "dist": "electron-builder --mac --win"
   },
   "homepage": "./",
   "main": "main.js",

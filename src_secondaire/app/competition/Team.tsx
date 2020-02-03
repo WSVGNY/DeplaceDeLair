@@ -1,6 +1,8 @@
 import { observable, computed } from 'mobx'
 import { Result } from './Result'
 
+const TRIES_COUNT: number = 3;
+
 export class Team {
     @observable public name: string
     @observable public results: Result[]
@@ -15,7 +17,7 @@ export class Team {
     }
 
     @computed get completed(): boolean {
-        return this.results.length === 3
+        return this.results.length === TRIES_COUNT
     }
 
     @computed get lastResult(): string {

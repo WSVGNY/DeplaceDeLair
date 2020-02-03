@@ -43,7 +43,7 @@ export default class LastTeam extends React.Component<{ store: TeamStore }, {}> 
                             animationOut="bounceOut"
                             durationOut={500}
                         >
-                            <Typography component={'span'}><Box fontSize={48} fontWeight="fontWeightLight" color="#008000">{lastTeamName}</Box></Typography>
+                            <Typography component={'span'}><Box maxWidth={1} fontSize={40} fontWeight="fontWeightLight" color="#008000">{lastTeamName}</Box></Typography>
                         </AnimateOnChange>
                     </Box>
 
@@ -53,7 +53,7 @@ export default class LastTeam extends React.Component<{ store: TeamStore }, {}> 
                             animationOut="bounceOut"
                             durationOut={500}
                         >
-                            <Typography component={'span'}><Box fontSize={48} fontWeight="fontWeightLight" color="#008000">{lastTeamResult}</Box></Typography>
+                            <Typography component={'span'}><Box fontSize={40} fontWeight="fontWeightLight" color="#008000">{lastTeamResult}</Box></Typography>
                         </AnimateOnChange>
                     </Box>
                 </Box>

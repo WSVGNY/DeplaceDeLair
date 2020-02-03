@@ -5,8 +5,14 @@ import * as XLSX from 'xlsx';
 const path = require('path');
 
 interface ITeam {
-    name: string;
+    equipe: string;
 }
+
+// Excel file names
+const TEAM_SHEET_NAME = "equipes"
+const TEAM_COLUMN_NAME = "equipe"
+const TIME_COLUMN_NAME = "temps"
+const DISTANCE_COLUMN_NAME = "distance"
 
 export class ExternalService {
 
@@ -16,7 +22,7 @@ export class ExternalService {
         const retrievedTeams: ITeam[] = ExternalService.getTeamsFromFile()
 
         for (const iTeam of retrievedTeams) {
-            const team = new Team(iTeam.name)
+            const team = new Team(iTeam.equipe)
             team.results = ExternalService.getResultsFromFile(iTeam)
             store.teams.push(team)
         }
@@ -34,8 +40,10 @@ export class ExternalService {
 
     private static getTeamsFromFile(): ITeam[] {
         const workbook = XLSX.readFile(ExternalService.path)
-        const json = XLSX.utils.sheet_to_json(workbook.Sheets["teams"])
+        const json = XLSX.utils.sheet_to_json(workbook.Sheets[TEAM_SHEET_NAME])
         const retrievedTeams: ITeam[] = json as ITeam[]
+
+        console.log(retrievedTeams)
 
         return retrievedTeams
     }
@@ -43,7 +51,7 @@ export class ExternalService {
     private static getResultsFromFile(iTeam: ITeam): Result[] {
         const results: Result[] = []
         for (var prop in iTeam) {
-            if (prop == "name") {
+            if (prop == TEAM_COLUMN_NAME) {
                 continue
             }
 
@@ -57,13 +65,13 @@ export class ExternalService {
                 results.push(new Result(resultId))
             }
 
-            if (prop.endsWith("temps")) {
+            if (prop.endsWith(TIME_COLUMN_NAME)) {
                 const resultTime: number = iTeam[prop]
                 results.find((res: Result) => res.id === resultId).time = resultTime
                 continue
             }
 
-            if (prop.endsWith("distance")) {
+            if (prop.endsWith(DISTANCE_COLUMN_NAME)) {
                 const resultDistance: number = iTeam[prop]
                 results.find((res: Result) => res.id === resultId).distance = resultDistance
             }
@@ -74,7 +82,7 @@ export class ExternalService {
     // Returns the team that just played
     private static updateTeamResults(localTeams: Team[], retrievedTeams: ITeam[]): Team {
         for (const localTeam of localTeams) {
-            const retrievedTeam: ITeam = retrievedTeams.find((t: ITeam) => localTeam.name === t.name)
+            const retrievedTeam: ITeam = retrievedTeams.find((t: ITeam) => localTeam.name === t.equipe)
             const retrievedResults: Result[] = ExternalService.getResultsFromFile(retrievedTeam)
 
             for (const result of retrievedResults) {
@@ -86,16 +94,18 @@ export class ExternalService {
                     return localTeam
                 }
 
-                // Add condition for if a result (time or distance) is already here
-
                 // Update existing result
+                let hasUpdated: boolean = false;
+                
                 if (localTeam.results[localResultIndex].time !== result.time) {
                     localTeam.results[localResultIndex].time = result.time
-                    return localTeam
                 }
 
                 if (localTeam.results[localResultIndex].distance !== result.distance) {
                     localTeam.results[localResultIndex].distance = result.distance
+                }
+
+                if (hasUpdated) {
                     return localTeam
                 }
             }

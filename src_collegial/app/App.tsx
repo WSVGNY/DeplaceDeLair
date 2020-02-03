@@ -33,7 +33,7 @@ const App = () => {
                         </Typography>
 
                         <Typography align="center" component="div" variant="h4">
-                            <Box color="text.secondary" marginBottom={4}>Volet Secondaire</Box>
+                            <Box color="text.secondary" marginBottom={4}>Volet Collégial</Box>
                         </Typography>
                     </Box>
                     <Box width={1 / 6} alignContent="center" >
@@ -41,17 +41,17 @@ const App = () => {
                     </Box>
                 </Box>
 
-                <Box display="flex" flexDirection="column" marginTop={5}>
+                <Box display="flex" flexDirection="column" marginTop={4}>
                     <Box><Leaderboard store={store} /></Box>
 
-                    <Box display="flex" flexDirection="row" marginTop={5}>
+                    <Box display="flex" flexDirection="row" marginTop={4}>
                         <Box width={3 / 5} paddingRight={10}> <LastTeam store={store} /></Box>
                         <Box width={2 / 5}><NextTeam store={store} /></Box>
                     </Box>
                 </Box>
             </div>
 
-            <div style={{ width: '80%', position: 'absolute', left: '50%', transform: 'translate(-50%)', marginBottom: '25px', bottom: '0' }}>
+            <div style={{ width: '80%', position: 'absolute', left: '50%', transform: 'translate(-50%)', marginBottom: '5px', bottom: '0' }}>
                 <Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-center">
 
                     <Typography component="div">
