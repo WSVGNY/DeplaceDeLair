@@ -25,7 +25,7 @@ const App = () => {
             <div style={{ width: '80%', position: 'absolute', left: '50%', transform: 'translate(-50%)', marginTop: '25px' }}>
                 <Box display="flex" flexDirection="row" alignItems="center">
                     <Box width={1 / 6} >
-                        <img src={competitionLogo} style={{ width: '100%', right: '0', bottom: '0' }} />
+                        <img src={competitionLogo} style={{ width: '80%', right: '0', bottom: '0' }} />
                     </Box>
                     <Box width={4 / 6} >
                         <Typography align="center" component="div" variant="h1">

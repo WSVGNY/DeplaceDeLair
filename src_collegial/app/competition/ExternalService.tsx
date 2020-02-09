@@ -52,12 +52,16 @@ export class ExternalService {
                 continue
             }
 
-            // Only accept numbers!
-            if (isNaN(iTeam[prop])) {
-                break
+            // Excel format : id_resultname
+            const resultId: string = prop[0]
+
+            // Only accept numeric values
+            if (isNaN(+iTeam[prop])) {
+                console.log(`Invalid value "${iTeam[prop]}" in column (${prop}) for team (${iTeam.equipe})`)
+
+                continue
             }
 
-            const resultId: string = prop[0]
             if (!results.find((res: Result) => res.id === resultId)) {
                 results.push(new Result(resultId))
             }

@@ -1,4 +1,5 @@
-# Electron typescript
+# Deplace de l'air
+# Based on the Electron typescript boilerplate
 
 ## Run application
 
@@ -20,8 +21,9 @@ yarn start
 yarn build
 ```
 
-In another terminal window run application
+## Distribute application
+Builds for macOS and Windows
 
 ```bash
-yarn start
+yarn dist
 ```

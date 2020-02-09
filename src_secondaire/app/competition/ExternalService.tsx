@@ -43,8 +43,6 @@ export class ExternalService {
         const json = XLSX.utils.sheet_to_json(workbook.Sheets[TEAM_SHEET_NAME])
         const retrievedTeams: ITeam[] = json as ITeam[]
 
-        console.log(retrievedTeams)
-
         return retrievedTeams
     }
 
@@ -55,27 +53,33 @@ export class ExternalService {
                 continue
             }
 
-            // Only accept numbers!
-            if (isNaN(iTeam[prop])) {
-                break
+            // Excel format : id_resultname
+            const resultId: string = prop[0]
+
+            // Only accept numeric values
+            if (isNaN(+iTeam[prop])) {
+                console.log(`Invalid value: column (${prop}) for team (${iTeam.equipe})`)
+
+                continue
             }
 
-            const resultId: string = prop[0]
             if (!results.find((res: Result) => res.id === resultId)) {
                 results.push(new Result(resultId))
             }
 
             if (prop.endsWith(TIME_COLUMN_NAME)) {
-                const resultTime: number = iTeam[prop]
+                const resultTime: number = +iTeam[prop]
                 results.find((res: Result) => res.id === resultId).time = resultTime
+
                 continue
             }
 
             if (prop.endsWith(DISTANCE_COLUMN_NAME)) {
-                const resultDistance: number = iTeam[prop]
+                const resultDistance: number = +iTeam[prop]
                 results.find((res: Result) => res.id === resultId).distance = resultDistance
             }
         }
+
         return results
     }
 
@@ -96,7 +100,7 @@ export class ExternalService {
 
                 // Update existing result
                 let hasUpdated: boolean = false;
-                
+
                 if (localTeam.results[localResultIndex].time !== result.time) {
                     localTeam.results[localResultIndex].time = result.time
                 }
