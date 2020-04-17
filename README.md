@@ -1,8 +1,8 @@
 # DeplaceDeLair
 
-Leaderboard built for the "Déplace de l'air" competition @ Polytechnique Montreal.
+Leaderboards for the "Déplace de l'air" competitions @ Polytechnique Montreal.
 
-The leaderboard reads scores from an Excel sheet and udates in real time.
+The leaderboards read scores from an Excel sheet and update in real time.
 
 Built with:
 
