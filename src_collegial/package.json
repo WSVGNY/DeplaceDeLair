@@ -55,6 +55,6 @@
     "react-animation": "^1.2.2",
     "react-flip-move": "^3.0.4",
     "url-loader": "^3.0.0",
-    "xlsx": "^0.15.4"
+    "xlsx": "^0.17.0"
   }
 }
